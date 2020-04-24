@@ -11,7 +11,7 @@ const setBiscuitMachineState = machineSwitch => {
   if (validateSwitchValue(machineSwitch)){
     machineMotor(machineSwitch)
   } else {
-    console.log('Please provide a valid switch value such as "off", "pause", "on".')
+    console.log('Please provide a valid switch value such as "off", "pause" or "on".')
     return false
   }
 }
@@ -41,11 +41,11 @@ const machineMotor = machineSwitch => {
 }
 
 const bake = () => {
-  return new Promise(resolve => setTimeout(resolve, 500))
+  return new Promise(resolve => setTimeout(resolve, 350))
 }
 
 const temperatureRampTime = () => {
-  return new Promise(resolve => setTimeout(resolve, 200))
+  return new Promise(resolve => setTimeout(resolve, 150))
 }
 
 const startOven = async () => {
@@ -81,7 +81,7 @@ const stopOven = async () => {
 
   ovenIsOn = false
   conveyorIsOn = false
-  while(!ovenIsOn && currentOvenTemperature > 1) {
+  while(!ovenIsOn && currentOvenTemperature > 0) {
     await temperatureRampTime()
     currentOvenTemperature --
     console.log('Oven cooling. Current temperature: ' + currentOvenTemperature)
